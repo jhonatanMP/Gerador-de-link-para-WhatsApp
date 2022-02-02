@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Gerador de Link WhatsApp</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <style>
+      body{background: #27272c;;}
+      .gerador-wapp{color: #fff;}
+      .form-wa input,#url_final input{width: 100%;border: 1px solid #000; border-radius: 8px;padding: 15px 50px;}
+      .form-wa input#numero{background: #fff url(./icon-phone.svg) center left 15px no-repeat;}
+      .form-wa input#mensagem{background: #fff url(./icon-msg.svg) center left 15px no-repeat;}
+      #url_final input{background: #fff url(./icon-copy.svg) center left 15px no-repeat;}
+      #geralink,.btn-wa-final{width: 100%; border: 0;border-radius: 8px; margin-top: 20px;padding: 15px 50px;background: #0bff8e40; color: #fff;text-transform: uppercase; font-weight: 700;}
+      .aviso-de-dados{margin-top: 30px;}
+      h2.msg-ok {font-size: 16px;margin-top: 26px;}
+      div#mensagem-error {color: orange;margin-top: 20px;}
+    </style>
+    <div class="container gerador-wapp">
+        <h2>Gerador de link para Whatsapp</h2>
+        <form method="post" id="form-wa" class="form-wa" name="form_wa">
+          <div class="row">
+            <div class="col-12">
+              <label for="numero">Número do celular</label>
+              <input type="text" name="numero" id="numero" placeholder="(00) 00000-0000" data-mask="(00) 00000-0000">
+            </div>
+            <div class="col-12">
+              <label for="mensagem">Mensagem</label>
+              <input type="text" name="mensagem" id="mensagem" placeholder="Escreva o texto">
+            </div>
+            <div id="mensagem-error" class="col-12"></div>
+            <div class="col-12">
+              <button type="button" id="geralink" onclick="generateLink()">Gerar Link</button>
+            </div>
+          </div>
+        </form>
+        <div id="url_final" style="display: none;">
+          <label for="linkgerado">Link gerado</label>
+          <input type="text" name="linkgerado" id="linkgerado" class="text_link_txt">
+          <h2 class="msg-ok"><strong>Pronto! </strong> Copie e compartilhe com queira!</h2>
+          <div class="row">
+            <div class="col-12 col-md-6"><button type="button" id="btn-copiar" class="btn-wa-final" onclick="copyLink('.text_link_txt')">Copiar Link</button></div>
+            <div class="col-12 col-md-6"><button type="button" id="btn-novo" class="btn-wa-final" onclick="resetFields()">Criar novo link</button></div>
+          </div>
+        </div>
+        <div class="col-12 aviso-de-dados">
+          <p>Atenção! Nos não gardamos os dados informados.</p>
+        </div>
+        <script>
+          function generateLink(){
+            let numero_get = document.form_wa.numero.value;
+            let numero = clearNumber(numero_get);
+            let mensagem_get = document.form_wa.mensagem.value;
+            if(numero_get != ""){
+              if(mensagem_get != ""){
+                document.getElementById('mensagem-error').innerHTML = '';
+                let mensagem = encodeURIComponent(mensagem_get);
+                let link = "https://api.whatsapp.com/send?";
+                let final_url = `${link}phone=55${numero}&text=${mensagem}`;
+                document.getElementById('linkgerado').value = final_url;
+                document.getElementById('form-wa').style.display = 'none';
+                document.getElementById('url_final').style.display = 'block';
+              }else{
+                document.getElementById('mensagem-error').innerHTML = 'Precisamos de uma mensagem para gerar o link';
+              }
+            }else{
+              document.getElementById('mensagem-error').innerHTML = 'Antes precisa informar um numero!';
+            }
+          }
+          function clearNumber(string){
+            var numsStr = string.replace(/[^0-9]/g, '');
+            return parseInt(numsStr);
+          }
+          function copyLink(element){
+            var $el = document.querySelector(element);
+            $el.select();
+            document.execCommand("copy");
+            document.getElementById('btn-copiar').innerHTML = 'Copiado!';
+          }
+          function resetFields(){
+            document.getElementById('btn-copiar').innerHTML = 'Copiar Link';
+            document.getElementById('linkgerado').value = '';
+            document.form_wa.numero.value = '';
+            document.form_wa.mensagem.value = '';
+            document.getElementById('mensagem-error').innerHTML = '';
+            document.getElementById('form-wa').style.display = 'block';
+            document.getElementById('url_final').style.display = 'none';
+          }
+        </script>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="./jquery.mask.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
