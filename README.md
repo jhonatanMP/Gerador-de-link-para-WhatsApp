@@ -14,10 +14,10 @@ Bem-vindo ao repositório do **Gerador de Link para WhatsApp**! Este projeto foi
 
 1. Clone este repositório em sua máquina local:
    ```bash
-   git clone https://github.com/seu-usuario/gerador-de-link-whatsapp.git
+   git clone https://github.com/jhonatanMP/Gerador-de-link-para-WhatsApp
 2. Navegue até o diretório do projeto:
    ```bash
-   cd gerador-de-link-whatsapp
+   cd gerador-de-link-para-whatsapp
 3. Abra o arquivo `index.html` em seu navegador para começar a gerar links para o WhatsApp.
 
 ## Contribuição
@@ -32,5 +32,5 @@ Este projeto está licenciado sob a [Licença MIT](LICENSE).
 
 Se você tiver alguma dúvida ou sugestão, entre em contato:
 
-- Email: seu-email@exemplo.com
-- GitHub: [seu-usuario](https://github.com/seu-usuario)
+- Email: jhonatanmachado8@gmail.com
+- GitHub: [seu-usuario](https://github.com/jhonatanMP)
