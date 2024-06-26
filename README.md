@@ -33,4 +33,4 @@ Este projeto está licenciado sob a [Licença MIT](LICENSE).
 Se você tiver alguma dúvida ou sugestão, entre em contato:
 
 - Email: jhonatanmachado8@gmail.com
-- GitHub: [seu-usuario](https://github.com/jhonatanMP)
+- GitHub: [jhonatanMP](https://github.com/jhonatanMP)
